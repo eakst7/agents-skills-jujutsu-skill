@@ -1,0 +1,23 @@
+{
+  "skill_name": "jujutsu-skill",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "I'm in a repo that has both .jj and .git directories. I want to split my last commit in two and push one half as a PR, without messing up my collaborator's branch. What should I do?",
+      "expected_output": "Agent confirms colocation, prefers jj commands, inspects with jj log/diff, uses jj split and jj bookmark create/track and jj git push -c or -b, explains bookmarks don't auto-advance, and warns if a mutating git command is needed.",
+      "files": []
+    },
+    {
+      "id": 2,
+      "prompt": "A teammate told me to just run `git rebase origin/main` in our colocated jj repo to update my branch. Should I?",
+      "expected_output": "Agent explains detached HEAD is normal, that git rebase can desync jj state and drops change-ID headers, recommends jj git fetch + jj rebase -b <bookmark> -o main@origin instead, and warns before any mutating git command.",
+      "files": []
+    },
+    {
+      "id": 3,
+      "prompt": "I ran a git command and now my jj bookmarks look wrong and a commit is in the wrong place. How do I recover?",
+      "expected_output": "Agent uses jj op log / jj --at-op preview / jj op restore or jj undo, notes git mutations appear as 'import git refs' operations, re-syncs with a jj command, and prefers jj bookmark move over further git mutations.",
+      "files": []
+    }
+  ]
+}
